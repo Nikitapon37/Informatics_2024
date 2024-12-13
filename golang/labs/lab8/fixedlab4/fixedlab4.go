@@ -33,7 +33,7 @@ func Task_B(arguments []float64) []float64 {
 func ReadInput(filename string) (float64, float64, float64, []float64, error) {
 	file, err := os.Open(filename)
 	if err != nil {
-		return 0, 0, 0, nil, err
+		return 0, 0, 0, nil, fmt.Errorf("failed to open file: %w", err)
 	}
 	defer file.Close()
 
@@ -44,7 +44,7 @@ func ReadInput(filename string) (float64, float64, float64, []float64, error) {
 	}
 
 	if err := scanner.Err(); err != nil {
-		return 0, 0, 0, nil, err
+		return 0, 0, 0, nil, fmt.Errorf("error reading file: %w", err)
 	}
 
 	if len(lines) < 3 {
@@ -53,24 +53,24 @@ func ReadInput(filename string) (float64, float64, float64, []float64, error) {
 
 	begin_x, err := strconv.ParseFloat(lines[0], 64)
 	if err != nil {
-		return 0, 0, 0, nil, fmt.Errorf("invalid begin_x: %v", err)
+		return 0, 0, 0, nil, fmt.Errorf("invalid begin_x: %w", err)
 	}
 
 	end_x, err := strconv.ParseFloat(lines[1], 64)
 	if err != nil {
-		return 0, 0, 0, nil, fmt.Errorf("invalid end_x: %v", err)
+		return 0, 0, 0, nil, fmt.Errorf("invalid end_x: %w", err)
 	}
 
 	delta_x, err := strconv.ParseFloat(lines[2], 64)
 	if err != nil {
-		return 0, 0, 0, nil, fmt.Errorf("invalid delta_x: %v", err)
+		return 0, 0, 0, nil, fmt.Errorf("invalid delta_x: %w", err)
 	}
 
 	var arguments []float64
 	for _, line := range lines[3:] {
 		value, err := strconv.ParseFloat(line, 64)
 		if err != nil {
-			return 0, 0, 0, nil, fmt.Errorf("invalid argument in line: %v", err)
+			return 0, 0, 0, nil, fmt.Errorf("invalid argument in line: %w", err)
 		}
 		arguments = append(arguments, value)
 	}
