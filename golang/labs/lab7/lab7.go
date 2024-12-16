@@ -1,74 +1,44 @@
 package lab7
 
-import "fmt"
+import (
+	"fmt"
+)
 
-type Product interface {
-	GetName() string
-	GetPrice() float64
-	SetPrice(price float64)
-	Discount(discount float64)
+type Products interface {
+	getName() string
+	setPrice(float64)
+	getPrice() float64
+	getInfo()
+	applyDiscount(float64)
 }
 
-type Chips struct {
-	Name  string
-	Price float64
-	Taste string
-}
-
-func (c *Chips) GetName() string {
-	return c.Name
-}
-
-func (c *Chips) GetPrice() float64 {
-	return c.Price
-}
-
-func (c *Chips) SetPrice(price float64) {
-	c.Price = price
-}
-
-func (c *Chips) Discount(discount float64) {
-	c.Price -= c.Price * discount / 100
-}
-
-type Eggs struct {
-	Name     string
-	Price    float64
-	Quantity float64
-}
-
-func (e *Eggs) GetName() string {
-	return e.Name
-}
-
-func (e *Eggs) GetPrice() float64 {
-	return e.Price
-}
-
-func (e *Eggs) SetPrice(price float64) {
-	e.Price = price
-}
-
-func (e *Eggs) Discount(discount float64) {
-	e.Price -= e.Price * discount / 100
-}
-
-func Calculate(products []Product) float64 {
-	total := 0.0
+func calculateTotalPrice(products []Products) float64 {
+	var sum float64 = 0
 	for _, product := range products {
-		total += product.GetPrice()
+		sum += product.getPrice()
 	}
-	return total
+
+	return sum
 }
 
 func RunLab7() {
-	Chips := &Chips{"Lays", 159.99, "Сметана лук"}
-	Eggs := &Eggs{"Деревенские", 100.00, 10}
+	product1 := NewTshirt("Nike", "White", 70, 1000)
+	product2 := NewChips("Lays", "Crab", 100, 150)
 
-	products := []Product{Chips, Eggs}
-	fmt.Println("Общая стоимость товаров:", Calculate(products))
+	listOfProduct := []Products{product1, product2}
 
-	Chips.Discount(12)
-	Eggs.Discount(20)
-	fmt.Println("Общая стоимость товаров после применения скидок:", Calculate(products))
+	fmt.Println("Товар-----------Цена")
+	for _, product := range listOfProduct {
+		fmt.Printf("%s-------%.2f ₽\n", product.getName(), product.getPrice())
+	}
+	fmt.Printf("Цена корзины до скидки: %.2f ₽\n\n", calculateTotalPrice(listOfProduct))
+
+	product1.applyDiscount(10)
+	product2.applyDiscount(27)
+
+	fmt.Println("Товар-----------Цена")
+	for _, product := range listOfProduct {
+		fmt.Printf("%s-------%.2f ₽\n", product.getName(), product.getPrice())
+	}
+	fmt.Printf("Цена корзины после скидки: %.2f ₽\n", calculateTotalPrice(listOfProduct))
 }
