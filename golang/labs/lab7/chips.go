@@ -30,12 +30,12 @@ func (c *Chips) getWeight() float64 {
 	return c.weight
 }
 
-func (c *Chips) getcolor() string {
+func (c *Chips) getTaste() string {
 	return c.taste
 }
 
 func (c *Chips) getInfo() {
-	fmt.Printf("name: %s\ntaste: %d\nweight: %s\nprice:", c.name, c.taste, c.weight, c.price)
+	fmt.Printf("name: %s\ntaste: %s\nweight: %.2f\nprice: %.2f\n", c.name, c.taste, c.weight, c.price)
 }
 
 func (c *Chips) applyDiscount(perDiscount float64) {

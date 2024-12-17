@@ -30,12 +30,12 @@ func (t *Tshirt) getSize() float64 {
 	return t.size
 }
 
-func (t *Tshirt) getcolor() string {
+func (t *Tshirt) getColor() string {
 	return t.color
 }
 
 func (t *Tshirt) getInfo() {
-	fmt.Printf("name: %s\ncolor: %d\nsize: %s\nprice:", t.name, t.color, t.size, t.price)
+	fmt.Printf("name: %s\ncolor: %s\nsize: %.2f\nprice: %.2f\n", t.name, t.color, t.size, t.price)
 }
 
 func (t *Tshirt) applyDiscount(perDiscount float64) {

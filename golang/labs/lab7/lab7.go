@@ -41,4 +41,14 @@ func RunLab7() {
 		fmt.Printf("%s-------%.2f ₽\n", product.getName(), product.getPrice())
 	}
 	fmt.Printf("Цена корзины после скидки: %.2f ₽\n", calculateTotalPrice(listOfProduct))
+
+	fmt.Println("Информация про футболку")
+	fmt.Println("Цвет:", product1.getColor())
+	fmt.Println("Размер:", product1.getSize())
+	fmt.Println("Бренд:", product1.getName())
+
+	fmt.Println("Информация про xbgcs")
+	fmt.Println("Вкус:", product2.getTaste())
+	fmt.Println("Масса:", product2.getWeight())
+	fmt.Println("Название:", product2.getName())
 }
