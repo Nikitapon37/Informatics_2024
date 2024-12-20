@@ -47,7 +47,7 @@ func RunLab7() {
 	fmt.Println("Размер:", product1.getSize())
 	fmt.Println("Бренд:", product1.getName())
 
-	fmt.Println("Информация про xbgcs")
+	fmt.Println("Информация про чипсы")
 	fmt.Println("Вкус:", product2.getTaste())
 	fmt.Println("Масса:", product2.getWeight())
 	fmt.Println("Название:", product2.getName())

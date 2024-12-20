@@ -9,8 +9,6 @@ import (
 
 	"isuct.ru/informatics2022/labs/lab7"
 
-	"isuct.ru/informatics2022/labs/lab8/fixedlab4"
-
 	"isuct.ru/informatics2022/labs/lab8"
 )
 
@@ -23,7 +21,7 @@ func main() {
 	fmt.Println("7 лабораторная:")
 	lab7.RunLab7()
 	fmt.Println("Исправленная 4 лаба (1 часть 8 лабы)")
-	fixedlab4.FixedLab4()
-	fmt.Println("8 лабораторная:")
+	lab8.RunFixedLab4()
+	fmt.Println("8 лабораторная, часть 2")
 	lab8.RunLab8()
 }

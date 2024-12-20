@@ -7,124 +7,43 @@ import (
 	"strings"
 )
 
-func getFilePath(scanner *bufio.Scanner) string {
-	fmt.Println("Введите название файла:")
-	for scanner.Scan() {
-		filePath := scanner.Text()
-		if filePath != "" {
-			return filePath
-		}
-		fmt.Println("Имя файла не может быть пустым. Попробуйте снова:")
-	}
-	return ""
-}
-
-func createFile(filePath string) (*os.File, error) {
-	file, err := os.Create(filePath)
-	if err != nil {
-		return nil, err
-	}
-	fmt.Println("Файл успешно создан:", filePath)
-	return file, nil
-}
-
-func writeFile(file *os.File, scanner *bufio.Scanner) error {
-	fmt.Println("Введите текст для записи в файл. Для завершения записи введите пустую строку и нажмите Enter:")
-	for scanner.Scan() {
-		input := scanner.Text()
-		if input == "" {
-			break
-		}
-		if _, err := file.WriteString(input + "\n"); err != nil {
-			return err
-		}
-	}
-	fmt.Println("Данные успешно записаны в файл.")
-	return nil
-}
-
-func readFile(filePath string) error {
-	file, err := os.Open(filePath)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	fmt.Println("\nСодержимое файла:")
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		fmt.Println(scanner.Text())
-	}
-	if err := scanner.Err(); err != nil {
-		return err
-	}
-	return nil
-}
-
-func searchInFile(filePath, searchText string) error {
-	file, err := os.Open(filePath)
-	if err != nil {
-		return err
-	}
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	found := false
-	lineNumber := 0
-	for scanner.Scan() {
-		lineNumber++
-		line := scanner.Text()
-		if strings.Contains(line, searchText) {
-			fmt.Printf("Найдено совпадение на строке %d: %s\n", lineNumber, line)
-			found = true
-		}
-	}
-	if err := scanner.Err(); err != nil {
-		return err
-	}
-	if !found {
-		fmt.Println("Совпадений не найдено.")
-	}
-	return nil
-}
-
 func RunLab8() {
-	scanner := bufio.NewScanner(os.Stdin)
+	reader := bufio.NewReader(os.Stdin)
 
-	filePath := getFilePath(scanner)
-	if filePath == "" {
-		fmt.Println("Ошибка: имя файла не задано.")
-		return
-	}
-
-	file, err := createFile(filePath)
+	fmt.Print("Введите имя файла: ")
+	fileName, err := reader.ReadString('\n')
 	if err != nil {
-		fmt.Println("Ошибка при создании файла:", err)
+		fmt.Printf("Ошибка ввода: %v\n", err)
 		return
 	}
-	defer file.Close()
+	fileName = strings.TrimSpace(fileName)
 
-	if err := writeFile(file, scanner); err != nil {
-		fmt.Println("Ошибка при записи в файл:", err)
-		return
-	}
-
-	if err := readFile(filePath); err != nil {
-		fmt.Println("Ошибка при чтении файла:", err)
+	if err := CreateFile(fileName); err != nil {
+		fmt.Println(err)
 		return
 	}
 
-	fmt.Println("\nВведите текст для поиска в файле:")
-	var searchText string
-	if scanner.Scan() {
-		searchText = scanner.Text()
+	if err := AppendDataToFile(fileName); err != nil {
+		fmt.Println(err)
+		return
 	}
 
-	if searchText != "" {
-		if err := searchInFile(filePath, searchText); err != nil {
-			fmt.Println("Ошибка при поиске в файле:", err)
-		}
-	} else {
-		fmt.Println("Поиск не выполнен: текст для поиска не был введен.")
+	content, err := ReadFile(fileName)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Printf("Содержимое файла:\n%s\n", content)
+
+	fmt.Print("Введите текст для поиска в файле: ")
+	searchText, err := reader.ReadString('\n')
+	if err != nil {
+		fmt.Printf("Ошибка ввода: %v\n", err)
+		return
+	}
+	searchText = strings.TrimSpace(searchText)
+
+	if err := SearchTextInFile(fileName, searchText); err != nil {
+		fmt.Println(err)
 	}
 }
