@@ -5,7 +5,6 @@ import (
 	"os"
 )
 
-// ReadFile читает содержимое файла.
 func ReadFile(fileName string) (string, error) {
 	data, err := os.ReadFile(fileName)
 	if err != nil {

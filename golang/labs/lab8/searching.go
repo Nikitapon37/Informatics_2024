@@ -7,7 +7,6 @@ import (
 	"strings"
 )
 
-// SearchTextInFile ищет текст в файле и выводит результат.
 func SearchTextInFile(fileName, searchText string) error {
 	file, err := os.Open(fileName)
 	if err != nil {
