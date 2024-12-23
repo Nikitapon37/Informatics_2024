@@ -13,7 +13,6 @@ var filePath string = "../golang/labs/lab8/"
 
 func ReadFileFor4(filename string) ([]float64, error) {
 	f, err := os.Open(filePath + filename)
-	fmt.Println(err)
 	if err != nil {
 		return nil, fmt.Errorf("Ошибка открытия файла")
 	}
