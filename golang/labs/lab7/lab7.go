@@ -4,14 +4,6 @@ import (
 	"fmt"
 )
 
-type Products interface {
-	getName() string
-	setPrice(float64)
-	getPrice() float64
-	getInfo()
-	applyDiscount(float64)
-}
-
 func calculateTotalPrice(products []Products) float64 {
 	var sum float64 = 0
 	for _, product := range products {
@@ -22,7 +14,7 @@ func calculateTotalPrice(products []Products) float64 {
 }
 
 func RunLab7() {
-	product1 := NewTshirt("Nike", "White", 70, 1000)
+	product1 := NewTShirt("Nike", "White", 70, 1000)
 	product2 := NewChips("Lays", "Crab", 100, 150)
 
 	listOfProduct := []Products{product1, product2}

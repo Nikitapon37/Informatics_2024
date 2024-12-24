@@ -23,7 +23,22 @@ func RunLab8() {
 		return
 	}
 
-	if err := AppendDataToFile(fileName); err != nil {
+	var inputLines []string
+	for {
+		fmt.Println("Введите строку для записи (или 'Нет' для завершения):")
+		newLine, err := reader.ReadString('\n')
+		if err != nil {
+			fmt.Printf("Ошибка чтения ввода: %v\n", err)
+			return
+		}
+		newLine = strings.TrimSpace(newLine)
+		if strings.EqualFold(newLine, "Нет") {
+			break
+		}
+		inputLines = append(inputLines, newLine)
+	}
+
+	if err := AppendDataToFile(fileName, inputLines); err != nil {
 		fmt.Println(err)
 		return
 	}

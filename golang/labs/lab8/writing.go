@@ -1,22 +1,13 @@
 package lab8
 
 import (
-	"bufio"
 	"fmt"
 	"os"
 	"strings"
 )
 
-func AppendDataToFile(fileName string) error {
-	reader := bufio.NewReader(os.Stdin)
-
-	for {
-		fmt.Println("Введите строку для записи (или 'Нет' для завершения):")
-		newLine, err := reader.ReadString('\n')
-		if err != nil {
-			return fmt.Errorf("ошибка чтения ввода: %w", err)
-		}
-
+func AppendDataToFile(fileName string, inputLines []string) error {
+	for _, newLine := range inputLines {
 		newLine = strings.TrimSpace(newLine)
 		if strings.EqualFold(newLine, "Нет") {
 			fmt.Println("Запись завершена.")
