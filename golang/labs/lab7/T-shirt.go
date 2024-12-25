@@ -14,30 +14,30 @@ func NewTShirt(name string, color string, size float64, price float64) *TShirt {
 	return tshirt
 }
 
-func (t *TShirt) getName() string {
+func (t *TShirt) GetName() string {
 	return t.name
 }
 
-func (t *TShirt) setPrice(newPrice float64) {
+func (t *TShirt) SetPrice(newPrice float64) {
 	t.price = newPrice
 }
 
-func (t *TShirt) getPrice() float64 {
+func (t *TShirt) GetPrice() float64 {
 	return t.price
 }
 
-func (t *TShirt) getSize() float64 {
+func (t *TShirt) GetSize() float64 {
 	return t.size
 }
 
-func (t *TShirt) getColor() string {
+func (t *TShirt) GetColor() string {
 	return t.color
 }
 
-func (t *TShirt) getInfo() {
+func (t *TShirt) GetInfo() {
 	fmt.Printf("name: %s\ncolor: %s\nsize: %.2f\nprice: %.2f\n", t.name, t.color, t.size, t.price)
 }
 
-func (t *TShirt) applyDiscount(perDiscount float64) {
+func (t *TShirt) ApplyDiscount(perDiscount float64) {
 	t.price = t.price * (1 - (perDiscount / 100))
 }

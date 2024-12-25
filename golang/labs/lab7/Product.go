@@ -1,9 +1,9 @@
 package lab7
 
 type Products interface {
-	getName() string
-	setPrice(float64)
-	getPrice() float64
-	getInfo()
-	applyDiscount(float64)
+	GetName() string
+	SetPrice(float64)
+	GetPrice() float64
+	GetInfo()
+	ApplyDiscount(float64)
 }

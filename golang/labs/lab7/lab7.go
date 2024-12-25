@@ -4,10 +4,10 @@ import (
 	"fmt"
 )
 
-func calculateTotalPrice(products []Products) float64 {
+func CalculateTotalPrice(products []Products) float64 {
 	var sum float64 = 0
 	for _, product := range products {
-		sum += product.getPrice()
+		sum += product.GetPrice()
 	}
 
 	return sum
@@ -21,26 +21,26 @@ func RunLab7() {
 
 	fmt.Println("Товар-----------Цена")
 	for _, product := range listOfProduct {
-		fmt.Printf("%s-------%.2f ₽\n", product.getName(), product.getPrice())
+		fmt.Printf("%s-------%.2f ₽\n", product.GetName(), product.GetPrice())
 	}
-	fmt.Printf("Цена корзины до скидки: %.2f ₽\n\n", calculateTotalPrice(listOfProduct))
+	fmt.Printf("Цена корзины до скидки: %.2f ₽\n\n", CalculateTotalPrice(listOfProduct))
 
-	product1.applyDiscount(10)
-	product2.applyDiscount(27)
+	product1.ApplyDiscount(10)
+	product2.ApplyDiscount(27)
 
 	fmt.Println("Товар-----------Цена")
 	for _, product := range listOfProduct {
-		fmt.Printf("%s-------%.2f ₽\n", product.getName(), product.getPrice())
+		fmt.Printf("%s-------%.2f ₽\n", product.GetName(), product.GetPrice())
 	}
-	fmt.Printf("Цена корзины после скидки: %.2f ₽\n", calculateTotalPrice(listOfProduct))
+	fmt.Printf("Цена корзины после скидки: %.2f ₽\n", CalculateTotalPrice(listOfProduct))
 
 	fmt.Println("Информация про футболку")
-	fmt.Println("Цвет:", product1.getColor())
-	fmt.Println("Размер:", product1.getSize())
-	fmt.Println("Бренд:", product1.getName())
+	fmt.Println("Цвет:", product1.GetColor())
+	fmt.Println("Размер:", product1.GetSize())
+	fmt.Println("Бренд:", product1.GetName())
 
 	fmt.Println("Информация про чипсы")
-	fmt.Println("Вкус:", product2.getTaste())
-	fmt.Println("Масса:", product2.getWeight())
-	fmt.Println("Название:", product2.getName())
+	fmt.Println("Вкус:", product2.GetTaste())
+	fmt.Println("Масса:", product2.GetWeight())
+	fmt.Println("Название:", product2.GetName())
 }
